@@ -1,0 +1,34 @@
+
+
+
+2- Find the names of the top 10 Employees who sold the most number of Orders
+ and order them in descending order showing the highest first
+ 
+use w3schools;
+SELECT  E.FirstName AS Employee_FirstName, E.LastName AS Employee_LastName,COUNT(O.OrderID) AS Number_of_Orders
+From Employees E INNER JOIN Orders O
+ON E.EmployeeID = O.EmployeeID
+GROUP BY E.EmployeeID
+ORDER BY Number_of_Orders DESC
+LIMIT 10;
+
+3-Find the names of the top 10 Employees who sold the highest Quantity of sales,in 'Beverages' category number of Orders
+ and order them in descending order showing the highest first
+
+
+
+USE w3schools;
+SELECT e.firstname AS Employee_FirstName, e.lastname AS Employee_LastName, COUNT(p.productid) AS Sold_Most_Beverages
+FROM employees AS e
+INNER JOIN ORDERS AS o
+ON e.employeeid = o.employeeid
+INNER JOIN order_details od
+ON o.orderid = od.orderid
+INNER JOIN products AS p
+ON od.productid = p.productid
+INNER JOIN categories AS c
+ON p.categoryid = c.categoryid
+WHERE categoryname = "Beverages"
+GROUP BY e.employeeid
+ORDER BY Sold_Most_Beverages DESC
+LIMIT 10;
